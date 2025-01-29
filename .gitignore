@@ -1,3 +1,6 @@
+# Textboox PDFs we can't legally share
+*.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

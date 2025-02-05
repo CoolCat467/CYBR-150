@@ -56,7 +56,7 @@ def print_counter(counter: Counter[str]) -> None:
 def run() -> None:
     """Run program."""
     text = read_file(ask_path("Please enter the filename: "))
-    # Use counter to get mapping of character to number of occurences
+    # Use counter to get mapping of character to number of occurrences
     counts = Counter(text)
     print_counter(counts)
 

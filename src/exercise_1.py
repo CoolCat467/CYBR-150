@@ -37,11 +37,14 @@ assert sys.version_info >= (3, 12), "Using type parameter syntax, new in 3.12."
 
 def ten_x_2d_manual() -> list[list[str]]:
     """Return 10x10 2d array of 'X's."""
-    # Confused by "manual" here, implies return constant array, but
-    # with size instruction, that's not possible.
     size = 10
-    # Could store before return, but why bother? (also linter removes)
-    return [["X"] * size for _ in range(size)]
+    val: list[list[str]] = []
+    for _ in range(size):
+        row: list[str] = []
+        for _ in range(size):
+            row.append("X")
+        val.append(row)
+    return val
 
 
 ##Exercise 2:
@@ -53,13 +56,7 @@ def ten_x_2d_manual() -> list[list[str]]:
 def ten_x_2d_naive() -> list[list[str]]:
     """Return 10x10 2d array of 'X's."""
     size = 10
-    val: list[list[str]] = []
-    for _ in range(size):
-        row: list[str] = []
-        for _ in range(size):
-            row.append("X")
-        val.append(row)
-    return val
+    return [["X"] * size] * size
 
 
 ##Exercise 3:
@@ -71,16 +68,7 @@ def ten_x_2d_naive() -> list[list[str]]:
 def ten_x_3d_naive() -> list[list[list[str]]]:
     """Return 10x10x10 3d array of 'X's."""
     size = 10
-    x: list[list[list[str]]] = []
-    for _ in range(size):
-        y: list[list[str]] = []
-        for _ in range(size):
-            z: list[str] = []
-            for _ in range(size):
-                z.append("X")
-            y.append(z)
-        x.append(y)
-    return x
+    return [[["X"] * size] * size] * size
 
 
 ##Exercise 4:
@@ -92,13 +80,7 @@ def ten_x_3d_naive() -> list[list[list[str]]]:
 def ten_nothing_2d_naive() -> list[list[str]]:
     """Return 10x10 2d array of 'Nothing'."""
     size = 10
-    val: list[list[str]] = []
-    for _ in range(size):
-        row: list[str] = []
-        for _ in range(size):
-            row.append("Nothing")
-        val.append(row)
-    return val
+    return [["Nothing"] * size] * size
 
 
 ##Exercise 5:
@@ -110,16 +92,7 @@ def ten_nothing_2d_naive() -> list[list[str]]:
 def ten_1_3d_naive() -> list[list[list[int]]]:
     """Return 10x10x10 3d array of 1s."""
     size = 10
-    x: list[list[list[int]]] = []
-    for _ in range(size):
-        y: list[list[int]] = []
-        for _ in range(size):
-            z: list[int] = []
-            for _ in range(size):
-                z.append(1)
-            y.append(z)
-        x.append(y)
-    return x
+    return [[[1] * size] * size] * size
 
 
 ##Exercise 6:
@@ -131,7 +104,7 @@ def ten_1_3d_naive() -> list[list[list[int]]]:
 def ten_x_2d() -> list[list[str]]:
     """Return 10x10 2d array of 'X's."""
     size = 10
-    return [["X"] * size for _ in range(size)]
+    return [["X" for _ in range(size)] for _ in range(size)]
 
 
 ##Exercise 7:
@@ -143,7 +116,7 @@ def ten_x_2d() -> list[list[str]]:
 def ten_comps_2d() -> list[list[str]]:
     """Return 10x10 2d array of 'Comps!'s."""
     size = 10
-    return [["Comps!"] * size for _ in range(size)]
+    return [["Comps!" for _ in range(size)] for _ in range(size)]
 
 
 ##Exercise 8:

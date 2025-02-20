@@ -85,19 +85,19 @@ class My_Circle:  # noqa: N801
 \tdiameter = {self.get_diameter()}
 \tcircumference = {self.get_circumference():.02f}"""
 
-    def __lt__(self, other: object) -> bool | NotImplemented:
+    def __lt__(self, other: object) -> bool:
         """Return < comparison of radius."""
         if not isinstance(other, My_Circle):
             return NotImplemented
         return self.get_radius() < other.get_radius()
 
-    def __gt__(self, other: object) -> bool | NotImplemented:
+    def __gt__(self, other: object) -> bool:
         """Return > comparison of radius."""
         if not isinstance(other, My_Circle):
             return NotImplemented
         return self.get_radius() > other.get_radius()
 
-    def __eq__(self, other: object) -> bool | NotImplemented:
+    def __eq__(self, other: object) -> bool:
         """Return == comparison of radius."""
         if not isinstance(other, My_Circle):
             return NotImplemented
@@ -121,11 +121,6 @@ class My_Circle:  # noqa: N801
             return 0
         return -2
 
-    def equal_to(self, other: object) -> bool | NotImplemented:
-        """Return if this circle's name and radius are equal to other object.
-
-        Returns NotImplemented if other object is not a My_Circle instance.
-        """
-        if not isinstance(other, My_Circle):
-            return NotImplemented
+    def equal_to(self, other: My_Circle) -> bool:
+        """Return if this circle's name and radius are equal to other object."""
         return self == other and self.get_name() == other.get_name()

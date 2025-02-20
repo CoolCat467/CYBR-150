@@ -26,7 +26,7 @@ __author__ = "CoolCat467"
 __license__ = "GNU General Public License Version 3"
 
 
-from My_Circle import My_Circle as Circle
+from My_Circle_lab_3 import My_Circle as Circle
 
 
 def test_circle() -> None:

@@ -27,7 +27,7 @@ __license__ = "GNU General Public License Version 3"
 
 
 from automobile import Automobile
-from car import Car
+from car_lab_5 import Car
 from truck import Truck
 
 

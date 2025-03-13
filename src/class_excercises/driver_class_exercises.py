@@ -29,9 +29,9 @@ __license__ = "GNU General Public License Version 3"
 from animal import Animal
 from employee_class_exercises import Employee
 from house import House
-from rectangle import Rectangle
+from rectangle_class_exercises import Rectangle
 from student_class_exercises import Student
-from triangle import Triangle
+from triangle_class_exercises import Triangle
 
 
 def test_triangle() -> None:

@@ -1,0 +1,30 @@
+Be sure you have a driver and a file for each class. Zip them files and submit here.
+
+    Polygon Class
+        Define all methods according to default practice
+
+    Triangle Class - Round all decimals to two places
+        get_area() - return the area of the triangle ((width*height)/2)
+        get_perimeter() - return the perimeter of the triangle (math.sqrt(width**2 + height**2) + width + height)
+        equal_to() - return True if height and width are the same
+        All other methods are according to default practice
+        You'll need to import the math packages
+
+    Rectangle Class - Round all decimals to two places
+        get_area() - return the area of the rectangle (width * length)
+        get_perimeter() - return the perimeter of the rectangle (2 * width + 2 * length)
+        equal_to() - return True if width and length are equal
+        All other methods are according to default practice
+        You'll need to import the math packages
+    Driver
+        Create a Triangle instance t1 with a width of 5 and a height of 6
+        Create a Rectangle instance r1 with a width of 6 and a length of 9
+        Print the Triangle using the print(t1) function
+        Print the Rectangle using the print(r1) function
+
+        image.png
+
+            Please print the name and sides via the superstring
+
+    Zip files, call them midterm.zip
+    Upload here!

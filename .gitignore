@@ -1,3 +1,6 @@
+# Compiled java files
+*.class
+
 # Textboox PDFs we can't legally share
 *.pdf
 

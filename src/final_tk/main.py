@@ -56,6 +56,7 @@ def handle_signup(
     last_entry: Entry,
     email_entry: Entry,
 ) -> None:
+    """Handle signup."""
     first = first_entry.get()
     middle = middle_entry.get()
     last = last_entry.get()
@@ -65,7 +66,8 @@ def handle_signup(
     info_label.config(text=f"Welcome {first}!")
 
 
-def trigger_new_user_model(root: Tk) -> None:
+def open_new_user_model(root: Tk) -> None:
+    """Handle opening new user model."""
     top = Toplevel(root)
 
     info_label = Label(top, text="You are a New User!")
@@ -118,13 +120,12 @@ def check_login(username: str, password: str) -> bool:
     with open(CREDENTIALS, "rb") as fp:
         with reader.BiReader(fp) as bi_reader:
             for item in bi_reader:
-                if item.name == username_bytes:
-                    if security.compare_hash_sync(
-                        password,
-                        item.content.decode("utf-8"),
-                        PEPPER,
-                    ):
-                        return True
+                if item.name == username_bytes and security.compare_hash_sync(
+                    password,
+                    item.content.decode("utf-8"),
+                    PEPPER,
+                ):
+                    return True
     return False
 
 
@@ -140,10 +141,11 @@ def handle_login(
 
     if check_login(username, password):
         print("Successful login")
-        trigger_new_user_model(root)
+        open_new_user_model(root)
 
 
 def register_new_login(username: str, password: str) -> None:
+    """Register new login credentials."""
     print(f"Creating new user {username!r} with password {password!r}")
     with CREDENTIALS.open("ab") as fp:
         fp.write(

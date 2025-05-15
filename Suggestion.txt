@@ -1,0 +1,51 @@
+Way of teaching object oriented programming in Python does not follow standard practice for Python programming, it's more like he converted how you would do it in Java to Python. In Python, mangled class variable names are not used often (ie `__name`), but more often just a leading underscore (such as `_name`), and when defining a class, doing something like
+```python
+class Person:
+    _name = "unset"
+```
+is defining a class variable `_name`, not initializing a blank class instance variable. If you wanted to do something that will actually limit adding class instance variables out of nowhere, something like
+```python
+class Person:
+    __slots__ = ("_name",)
+```
+will raise an error if any variable not in `__slots__` is attempted to be set, and additionally it bring memory usage benefits, because instead of doing a lookup in `__dict__` for each instance variable, Python allocates a memory slot on the class itself for the variable.
+
+They python way of doing getters and setters is to use `@property`, ie
+```python
+class Person:
+    __slots__ = ("_name", "_age")
+    def __init__(self, name: str, age: int) -> None:
+        self.name = name
+        self.age = age
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @name.setter
+    def name(self, value: str) -> None:
+        self._name = value
+
+    @property
+    def age(self) -> int:
+        return self._age
+
+    @age.setter
+    def age(self, value: int) -> None:
+        self._age = value
+```
+With this, any access to `name` or `age` will actually be calling the get and set methods defined for the associated properties. Importantly, the `__slots__` part prevents there from accidentally not being a proper getter or setter, because it will raise an error. For example,
+```console
+>>> class Person:
+...     __slots__ = ("_name", "_age")
+...     def __init__(self, name: str, age: int) -> None:
+...         self.name = name
+...         self.age = age
+...
+>>> p = Person("name", 7)
+Traceback (most recent call last):
+  File "<pyshell#38>", line 4, in __init__
+AttributeError: 'Person' object has no attribute 'name' and no __dict__ for setting new attributes. Did you mean: '_name'?
+```
+
+Additionally, I would suggest teaching about using type annotations, because first off, IDEs like Pycharm have static type analyzers built-in and will make more accurate suggestions as you are typing if your functions have type annotations, and additionally it makes it easier for people to switch to a proper typed programming language like Java.

@@ -78,17 +78,25 @@ class Admin(User):
         """Set privilege_level."""
         self.__privilege_level = privilege_level
 
+    set_priv_level = set_privilege_level
+
     def set_office_number(self, office_number: int) -> None:
         """Set office_number."""
         self.__office_number = office_number
+
+    set_office_numb = set_office_number
 
     def get_privilege_level(self) -> int:
         """Get privilege_level."""
         return self.__privilege_level
 
+    get_priv_level = get_privilege_level
+
     def get_office_number(self) -> int:
         """Get office_number."""
         return self.__office_number
+
+    get_office_numb = get_office_number
 
     def __repr__(self) -> str:
         """Return representation of this object for python console."""

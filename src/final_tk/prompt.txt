@@ -1,0 +1,13 @@
+MAIN PROMPT:
+    You have been tasked with helping grab login credentials
+for your new company. Please create a small tkinter GUI that presents a
+user fields to enter a username and password and a button to login. You
+must add labels and organize the widgets for usability. When clicked,
+the button will print out the username and the password to the console.
+Be sure the password is obscured when entering it into the GUI!
+
+BONUS (+5):
+    If the password is correct, tell the user they are a "New
+User" and allow them to enter First, Middle, Last, and Email into a new
+window. Add a Signup button that displays their information to the
+console and prints "Welcome {first}!" somewhere in the tkinter window.

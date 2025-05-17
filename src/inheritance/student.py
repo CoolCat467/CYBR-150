@@ -26,7 +26,7 @@ __author__ = "CoolCat467"
 __license__ = "GNU General Public License Version 3"
 
 
-from user import User
+from user_inheritance import User
 
 
 class Student(User):

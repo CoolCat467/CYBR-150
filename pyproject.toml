@@ -1,5 +1,4 @@
 [tool.mypy]
-plugins = ["numpy.typing.mypy_plugin"]
 files = ["src/",]
 check_untyped_defs = true
 disallow_any_decorated = true

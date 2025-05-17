@@ -26,7 +26,7 @@ __author__ = "CoolCat467"
 __license__ = "GNU General Public License Version 3"
 
 
-from admin import Admin
+from admin_inheritance import Admin
 from appliance import Appliance
 from bedroom import Bedroom
 from dishwasher import Dishwasher
@@ -37,7 +37,7 @@ from kitchen import Kitchen
 from refrigerator import Refrigerator
 from room import Room
 from student import Student
-from user import User
+from user_inheritance import User
 
 
 def test_user() -> None:

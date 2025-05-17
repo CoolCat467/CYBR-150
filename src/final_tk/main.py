@@ -112,10 +112,14 @@ def check_login(username: str, password: str) -> bool:
     with open(CREDENTIALS, "rb") as fp:
         with reader.BiReader(fp) as bi_reader:
             for item in bi_reader:
-                if item.name == username_bytes and security.compare_hash_sync(
-                    password,
-                    item.content.decode("utf-8"),
-                    PEPPER,
+                if (
+                    isinstance(item, reader.BlobField)
+                    and item.name == username_bytes
+                    and security.compare_hash_sync(
+                        password,
+                        item.content.decode("utf-8"),
+                        PEPPER,
+                    )
                 ):
                     return True
     return False

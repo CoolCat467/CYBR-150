@@ -22,12 +22,11 @@ from __future__ import annotations
 
 __title__ = "Login System"
 __author__ = "CoolCat467"
-__version__ = "0.0.0"
+__version__ = "2.0.0"
 __license__ = "GNU General Public License Version 3"
 
 
 from functools import partial
-from os import getenv, makedirs, path
 from pathlib import Path
 from tkinter import Button, Entry, Label, Tk, Toplevel
 from typing import Final
@@ -35,16 +34,9 @@ from typing import Final
 import reader
 import security
 
-HOME: Final = Path(getenv("HOME", path.expanduser("~")))
-XDG_DATA_HOME: Final = Path(
-    getenv("XDG_DATA_HOME", HOME / ".local" / "share"),
-)
-XDG_CONFIG_HOME: Final = Path(getenv("XDG_CONFIG_HOME", HOME / ".config"))
+THIS_FOLDER: Final = Path(__file__).absolute().parent
 
-FILE_TITLE: Final = __title__.lower().replace(" ", "-").replace("-", "_")
-CONFIG_PATH: Final = XDG_CONFIG_HOME / FILE_TITLE
-DATA_PATH: Final = XDG_DATA_HOME / FILE_TITLE
-CREDENTIALS: Final = CONFIG_PATH / "credentials.bi"
+CREDENTIALS: Final = THIS_FOLDER / "credentials.bi"
 
 PEPPER = "global pepper is important for secure password security"
 
@@ -161,8 +153,6 @@ def register_new_login(username: str, password: str) -> None:
 
 def main() -> None:
     """Run program."""
-    if not path.exists(CONFIG_PATH):
-        makedirs(CONFIG_PATH)
     print(f"Credentials file: {CREDENTIALS}")
     if not CREDENTIALS.exists():
         username = "admin"

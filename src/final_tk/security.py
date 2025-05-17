@@ -1,6 +1,24 @@
-"""Security functions like hashing passwords."""
+"""Security - Functions like hashing passwords."""
 
 # Programmed by CoolCat467
+
+from __future__ import annotations
+
+# Security - Functions like hashing passwords.
+# Copyright (C) 2024  CoolCat467
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 __title__ = "Security"
 __author__ = "CoolCat467"
@@ -8,13 +26,12 @@ __author__ = "CoolCat467"
 import base64
 import hmac
 import secrets
-import time
-from collections.abc import Callable
 from functools import wraps
 from hashlib import sha3_256 as _raw_sha3_256
-from typing import TypeVar
+from typing import TYPE_CHECKING, TypeVar
 
-import trio
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 _NEWEST_HASH: str = ""
 _HASH_FUNCTIONS: dict[str, Callable[[str], str]] = {}
@@ -132,48 +149,6 @@ def compare_hash_sync(password: str, database_value: str, pepper: str) -> bool:
     return hmac.compare_digest(recorded, new_hash)
 
 
-async def compare_hash(
-    password: str,
-    database_value: str,
-    pepper: str,
-) -> bool:
-    """Compare password and database value in a constant amount of time."""
-    # 1 millisecond is 1e+6 nanoseconds
-    target = 2e6  # Probably fine given ~136403ns test, order of magnitude up
-    start = time.perf_counter_ns()
-    recorded, new_hash = get_password_hash_for_compare(
-        password,
-        database_value,
-        pepper,
-    )
-    is_equal = recorded == new_hash
-    end = time.perf_counter_ns()
-    # Sleep for at least target nanoseconds (divide by 1e+9 -> seconds)
-    await trio.sleep(max(0, target - (end - start)) / 1e9)
-    # THEN return result
-    return is_equal
-
-
 def create_new_password(min_length: int) -> str:
     """Create a new secure password."""
     return secrets.token_urlsafe(min_length)
-
-
-# def time_function(
-#     function: Callable[..., T], *args: Any, **kwargs: Any
-# ) -> tuple[T, int]:
-#     """Time function execution"""
-#     start = time.perf_counter_ns()
-#     value = function(*args, **kwargs)
-#     end = time.perf_counter_ns()
-#     return value, end - start
-
-
-# async def time_function_async(
-#     function: Callable[..., Awaitable[T]], *args: Any, **kwargs: Any
-# ) -> tuple[T, int]:
-#     """Time asynchronous function execution"""
-#     start = time.perf_counter_ns()
-#     value = await function(*args, **kwargs)
-#     end = time.perf_counter_ns()
-#     return value, end - start

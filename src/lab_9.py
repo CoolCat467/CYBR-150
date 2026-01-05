@@ -252,10 +252,10 @@ def grid_widgets(
 def set_content(root: tk.Tk) -> tk.Tk:
     """Configure window."""
     # Step 5 - Go to get_button_frame()
-    button_frame, save_btn, open_btn, clear_btn = get_button_frame(root)
+    _button_frame, save_btn, open_btn, clear_btn = get_button_frame(root)
     text = get_textarea(root)
     # Step 12 - Go to get_key_frame()
-    key_frame, keyarea, label = get_key_frame(root)
+    _key_frame, keyarea, label = get_key_frame(root)
     # Step 17 - Go back to main, look for Step 18
     grid_widgets(save_btn, open_btn, clear_btn, text, keyarea, label)
     return root
